@@ -167,6 +167,55 @@ function monthlyKidsExpenseForOffset(monthOffset, currentAge, birthAges, kidsInf
   return total;
 }
 
+function formatKidsMonthlyCompact(value) {
+  const safe = Math.max(0, Number(value) || 0);
+  if (safe >= 100000) {
+    return `${(safe / 100000).toFixed(1)} L/mo`;
+  }
+  if (safe >= 1000) {
+    return `${Math.round(safe / 1000)}k/mo`;
+  }
+  return `${Math.round(safe)}/mo`;
+}
+
+function renderKidsExpenseGuideTable() {
+  const body = document.getElementById("kidsExpenseTableBody");
+  if (!body) return;
+
+  const rows = [
+    { label: "0 to <1", monthly: 0 },
+    { label: "1 to 6", monthly: 10000 },
+    { label: "7 to 16", monthly: 20000 },
+    { label: "17 to 18", monthly: 30000 },
+    { label: "19 to 22", monthly: 50000 },
+    { label: "23+", monthly: 0 },
+  ];
+
+  body.innerHTML = rows
+    .map((row) => `
+      <tr>
+        <td>${row.label}</td>
+        <td>${formatKidsMonthlyCompact(row.monthly)}</td>
+      </tr>
+    `)
+    .join("");
+}
+
+function openKidsExpenseGuide() {
+  const modal = document.getElementById("kidsExpenseModal");
+  if (!modal) return;
+  renderKidsExpenseGuideTable();
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeKidsExpenseGuide() {
+  const modal = document.getElementById("kidsExpenseModal");
+  if (!modal) return;
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+}
+
 function monthsToTarget(
   targetCorpus,
   currentCorpus,
@@ -719,6 +768,16 @@ document.getElementById("fireHomeBuyAge").addEventListener("input", calculateFir
 document.getElementById("fireHomeValueToday").addEventListener("input", calculateFire);
 document.getElementById("fireHomeDownPaymentPct").addEventListener("input", calculateFire);
 document.getElementById("fireHomeLoanRate").addEventListener("input", calculateFire);
+document.getElementById("openKidsExpenseGuide").addEventListener("click", (event) => {
+  event.preventDefault();
+  openKidsExpenseGuide();
+});
+document.getElementById("closeKidsExpenseGuide").addEventListener("click", closeKidsExpenseGuide);
+document.querySelector("[data-close-kids-modal=true]").addEventListener("click", closeKidsExpenseGuide);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeKidsExpenseGuide();
+});
 
+renderKidsExpenseGuideTable();
 renderKidsBirthAgeInputs();
 loadDashboard();

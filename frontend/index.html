@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finance Expenses Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=20" />
+    <link rel="stylesheet" href="styles.css?v=21" />
   </head>
   <body>
     <div class="backdrop"></div>
@@ -57,7 +57,7 @@
             <input id="firePostRetExpensePct" type="number" min="10" max="150" step="1" value="80" />
             <div class="kids-row">
               <div class="kids-item">
-                <label>Number of Kids</label>
+                <label class="kids-label-row">No of kids <button id="openKidsExpenseGuide" class="inline-link-btn" type="button">(click here for expense plan)</button></label>
                 <select id="fireKidsCount" class="level-select">
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -163,6 +163,30 @@
       <p id="statusMessage" class="status"></p>
     </main>
 
-    <script src="app.js?v=24"></script>
+    <div id="kidsExpenseModal" class="modal-shell hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close-kids-modal="true"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="kidsExpenseModalTitle">
+        <div class="modal-head">
+          <div>
+            <h3 id="kidsExpenseModalTitle">Kids Expense Guide</h3>
+            <p>Base monthly costs by child age. Inflation is applied separately in the projection.</p>
+          </div>
+          <button id="closeKidsExpenseGuide" class="modal-close-btn" type="button" aria-label="Close kids expense guide">Close</button>
+        </div>
+        <div class="modal-table-wrap">
+          <table class="modal-table">
+            <thead>
+              <tr>
+                <th>Kid Age</th>
+                <th>Monthly Expense</th>
+              </tr>
+            </thead>
+            <tbody id="kidsExpenseTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js?v=27"></script>
   </body>
 </html>

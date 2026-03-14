@@ -450,6 +450,13 @@ th {
   gap: 0.35rem;
 }
 
+.kids-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
 .kids-birth-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -459,6 +466,90 @@ th {
 .kids-birth-item {
   display: grid;
   gap: 0.35rem;
+}
+
+.inline-link-btn {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.inline-link-btn:hover {
+  color: inherit;
+}
+
+.modal-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+}
+
+.modal-shell.hidden {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(5px);
+}
+
+.modal-card {
+  position: relative;
+  width: min(92vw, 680px);
+  max-height: 82vh;
+  overflow: auto;
+  border-radius: 18px;
+  border: 1px solid #d7e1f4;
+  background: linear-gradient(180deg, #ffffff, #f7faff);
+  box-shadow: 0 24px 80px rgba(17, 24, 39, 0.22);
+  padding: 1rem 1rem 1.1rem;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+
+.modal-head h3 {
+  margin: 0;
+  color: #162544;
+}
+
+.modal-head p {
+  margin: 0.3rem 0 0;
+  color: #607496;
+  font-size: 0.9rem;
+}
+
+.modal-close-btn {
+  border: 1px solid #d4def2;
+  background: #ffffff;
+  color: #17305f;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.modal-table-wrap {
+  overflow-x: auto;
+}
+
+.modal-table {
+  margin-top: 0;
 }
 
 .home-grid {
